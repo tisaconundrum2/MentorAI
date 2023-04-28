@@ -6,5 +6,10 @@ app = Flask(__name__)
 def chat():
     pass
 
+@app.route("/")
+def hello():
+    return "Hello, World!"
+
+
 if __name__ == '__main__':
     app.run(debug=False)

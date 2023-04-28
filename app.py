@@ -8,7 +8,10 @@ def chat():
 
 @app.route("/")
 def hello():
-    return "Hello, World!"
+    return """
+    <h1>Hello, World!</h1>
+    <p>Welcome to the place where AI Oracles answer your every question.
+    """
 
 
 if __name__ == '__main__':

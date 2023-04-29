@@ -2,9 +2,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+
 @app.route('/chat', methods=['POST'])
 def chat():
-    pass
+    message = request.get_json().get("challenge")
+    return message
+
 
 @app.route("/")
 def hello():

@@ -11,12 +11,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const chat = require('./controllers/chatController')
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(bodyParser.json());
 
 app.post('/chat', chat);
 
-app.listen(3000, () => {
-  console.log('Server is listening on port 3000');
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });

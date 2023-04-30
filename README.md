@@ -1,2 +1,3 @@
-# slack-gpt-bot
-A GPT Bot for all your Q&amp;A needs
+# Mentor AI
+
+Slackbot for Chat GPT

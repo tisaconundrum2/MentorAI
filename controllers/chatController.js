@@ -11,4 +11,11 @@ function chat(req, res) {
     }
 }
 
-module.exports = chat
+function get(req, res) {
+    return res.send("<h1>Hello World</h1><p>MentorAI the AI oracle that will answer all your questions");
+}
+
+module.exports = {
+    chat,
+    get
+}

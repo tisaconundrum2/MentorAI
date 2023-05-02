@@ -9,18 +9,33 @@
  * [ ] Build connection to chat, have it respond back with full request body in JSON 
  */
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const chatController = require('./controllers/chatController')
+const { App } = require("@slack/bolt");
+require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 
-
-const app = express();
-app.use(bodyParser.json());
-
-app.post('/chat', chatController.chat);
-app.get('/', chatController.get);
-
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+// Initializes your app with your bot token and signing secret
+const app = new App({
+    token: process.env.BOT_TOKEN,
+    appToken: process.env.APP_TOKEN,
+    signingSecret: process.env.SIGN_SECRET
 });
+
+app.event('app_mention', async ({ event, say }) => {
+    try {
+        await say(`Hi there, <@${event.user}>`);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+app.message('hello', async ({ message, say }) => {
+    await say(`Hi there, <@${message.user}>!`);
+});
+
+
+(async () => {
+    const port = PORT
+    // Start your app
+    await app.start(process.env.PORT || port);
+    console.log(`⚡️ Slack Bolt app is running on port ${port}!`);
+})();

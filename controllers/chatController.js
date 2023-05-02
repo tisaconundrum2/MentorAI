@@ -1,22 +1,19 @@
 // const User = require('../models/user');
-const { App } = require('@slack/bolt');
 
-function chat(req, res) {
-    try {
-        if (req?.body['type'] === 'url_verification') {
-            return res.send(req.body['challenge']);
-        }
-        res.json(req.body);
-    } catch (error) {
-        res.status(500).json({ message: error.message })
+export class Chat {
+
+    static async appMention({ event, say }) {
+      try {
+        await say(`Hi there, <@${event.user}>`);
+      } catch (error) {
+        console.error(error);
+      }
     }
-}
-
-function get(req, res) {
-    return res.send("<h1>Hello World</h1><p>MentorAI the AI oracle that will answer all your questions");
-}
-
-module.exports = {
-    chat,
-    get
-}
+  
+    static async hello({ message, say }) {
+      await say(
+        `Hi there, <@${message.user}>! I'm MentorAI the AI oracle that will answer all your questions`
+      );
+    }
+  }
+  

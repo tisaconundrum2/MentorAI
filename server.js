@@ -12,6 +12,7 @@
 const { App } = require("@slack/bolt");
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
+const { Chat } = require('./controllers/chatController')
 
 // Initializes your app with your bot token and signing secret
 const app = new App({
@@ -20,17 +21,8 @@ const app = new App({
     signingSecret: process.env.SIGN_SECRET
 });
 
-app.event('app_mention', async ({ event, say }) => {
-    try {
-        await say(`Hi there, <@${event.user}>`);
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-app.message('hello', async ({ message, say }) => {
-    await say(`Hi there, <@${message.user}>!`);
-});
+app.event('app_mention', Chat.appMention);
+app.message('hello', Chat.hello);
 
 
 (async () => {

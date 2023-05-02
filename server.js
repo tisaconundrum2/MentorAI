@@ -29,5 +29,5 @@ app.message('hello', Chat.hello);
     const port = PORT
     // Start your app
     await app.start(process.env.PORT || port);
-    console.log(`⚡️ Slack Bolt app is running on port ${port}!`);
+    console.log(`⚡️ Mentor AI app is running on port ${port}!`);
 })();

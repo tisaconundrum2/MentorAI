@@ -4,11 +4,18 @@ class Chat {
 
   static async appMention({ event, say }) {
     try {
-      await say(`Hi there, <@${event.user}>`);
+      // Send an inline reply to the mention
+      const response = await say({
+        text: `Hi there, <@${event.user}>!`,
+        thread_ts: event.thread_ts || event.ts // Use the thread timestamp if available, otherwise use the event timestamp
+      });
+
+      console.log(`Sent inline reply to ${event.channel}: ${response.ts}`);
     } catch (error) {
       console.error(error);
     }
   }
+
 
   static async hello({ message, say }) {
     await say(

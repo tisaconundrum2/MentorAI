@@ -15,6 +15,17 @@ class Chat {
       `Hi there, <@${message.user}>! I'm MentorAI the AI oracle that will answer all your questions`
     );
   }
+
+  static async question({ command, ack, say }) {
+    try {
+      await ack();
+      await say("Yaaay! that command works!");
+    } catch (error) {
+      console.log("err")
+      console.error(error);
+    }
+  }
+
 }
 
 module.exports = {

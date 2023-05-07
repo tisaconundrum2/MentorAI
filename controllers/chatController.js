@@ -18,10 +18,28 @@ class Chat {
 
 
   static async hello({ message, say }) {
-    await say(
-      `Hi there, <@${message.user}>! I'm MentorAI the AI oracle that will answer all your questions`
-    );
+    try {
+      if (message.thread_ts) {
+        // The message is a reply in a thread
+        const response = await say({
+          text: `Thanks for your response, <@${message.user}>!`,
+          thread_ts: message.thread_ts
+        });
+
+        console.log(`Sent reply to ${message.channel}: ${response.ts}`);
+      } else {
+        // The message is not a reply in a thread
+        const response = await say(
+          `Hi there, <@${message.user}>! I'm MentorAI the AI oracle that will answer all your questions`
+        );
+
+        console.log(`Sent message to ${message.channel}: ${response.ts}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
+
 
   static async question({ command, ack, say }) {
     try {

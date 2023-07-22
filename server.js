@@ -22,9 +22,6 @@ const app = new App({
 });
 
 app.event('app_mention', Chat.appMention);
-app.command('/question', Chat. question);
-app.message('hello', Chat.hello);
-
 
 (async () => {
     const port = PORT
